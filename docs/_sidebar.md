@@ -67,3 +67,6 @@
   * [zip函数](5.流程控制/zip函数.md)
   * [reversed函数](5.流程控制/reversed函数.md)
   * [sorted函数](5.流程控制/sorted函数.md)
+
+* 练习题
+  * [12.23](20.练习题/12.23.md)
