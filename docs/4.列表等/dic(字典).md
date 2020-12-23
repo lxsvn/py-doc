@@ -143,7 +143,7 @@ KeyError: 'five'
 
 除了上面这种方式外，Python 更推荐使用 dict 类型提供的 get() 方法来获取指定键对应的值。当指定的键不存在时，get() 方法不会抛出异常。
 
-**get() 方法**
+*get() 方法*
 > dictname.get(key[,default])
 
 其中，dictname 表示字典变量的名字；key 表示指定的键；default 用于指定要查询的键不存在时，此方法返回的默认值，如果不手动指定，会返回 None。

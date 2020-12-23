@@ -7,7 +7,7 @@
 
 ## 添加键值对
 为字典添加新的键值对很简单，直接给不存在的 key 赋值即可，具体语法格式如下：
-> ictname[key] = value
+> dictname[key] = value
 
 对各个部分的说明：
 - dictname 表示字典名称。

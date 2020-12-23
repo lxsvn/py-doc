@@ -4,7 +4,7 @@
 
 continue 语句的用法和 break 语句一样，只要 while 或 for 语句中的相应位置加入即可。例如：
 ```python
-add = "http://doc-py.she-tech.cn/"
+add = "http://doc-py.she-t,ech.cn/"
 # 一个简单的for循环
 for i in add:
     if i == ',' :
@@ -15,8 +15,9 @@ for i in add:
 ```    
 运行上面程序，将看到如下运行结果：
 ```consle
-http://doc-py.she-tech.cn/
-http://doc-py.she-tech.cn/
+http://doc-py.she-t
+
+ech.cn/
 ```
 
-可以看到，当遍历 add 字符串至逗号（ , ）时，会进入 if 判断语句执行 print() 语句和 continue 语句。其中，print() 语句起到换行的作用，而 continue 语句会使 Python 解释器忽略执行第 8 行代码，直接从下一次循环开始执行。
+可以看到，当遍历 add 字符串至逗号（ , ）时，会进入 if 判断语句执行 print() 语句和 continue 语句。其中，print() 语句起到换行的作用，而 continue 语句会使 Python 后面的代码，直接从下一次循环开始执行。
