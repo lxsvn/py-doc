@@ -1,5 +1,6 @@
 ![logo](imgs/logo.png ':size=130x130')
-# PYTHON
+# 辰飞IT职业教育
+## PYTHON
 
 > Python 是一门开源免费、通用型的脚本编程语言，它上手简单，功能强大，坚持「极简主义」。
 
