@@ -7,10 +7,10 @@
 ```python
 
 # 导入第三方库(插件)
-from openpyxl import load_workbook, Workbook
+import openpyxl
 
 # 1. 定义excel操作对象
-wb = Workbook()
+wb = openpyxl.Workbook()
 
 # 2. 激活 excel工作簿
 ws = wb.active
