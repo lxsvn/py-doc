@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/crypto/crypto-js.js"></script>
+
+    <script>
+        function stringToByte(str) {
+            var bytes = new Array();
+            var len, c;
+            len = str.length;
+            for (var i = 0; i < len; i++) {
+                c = str.charCodeAt(i);
+                if (c >= 0x010000 && c <= 0x10FFFF) {
+                    bytes.push(((c >> 18) & 0x07) | 0xF0);
+                    bytes.push(((c >> 12) & 0x3F) | 0x80);
+                    bytes.push(((c >> 6) & 0x3F) | 0x80);
+                    bytes.push((c & 0x3F) | 0x80);
+                } else if (c >= 0x000800 && c <= 0x00FFFF) {
+                    bytes.push(((c >> 12) & 0x0F) | 0xE0);
+                    bytes.push(((c >> 6) & 0x3F) | 0x80);
+                    bytes.push((c & 0x3F) | 0x80);
+                } else if (c >= 0x000080 && c <= 0x0007FF) {
+                    bytes.push(((c >> 6) & 0x1F) | 0xC0);
+                    bytes.push((c & 0x3F) | 0x80);
+                } else {
+                    bytes.push(c & 0xFF);
+                }
+            }
+            return bytes;
+
+
+        }
+
+        function byteToString(arr) {
+            if (typeof arr === 'string') {
+                return arr;
+            }
+            var str = '',
+                _arr = arr;
+            for (var i = 0; i < _arr.length; i++) {
+                var one = _arr[i].toString(2),
+                    v = one.match(/^1+?(?=0)/);
+                if (v && one.length == 8) {
+                    var bytesLength = v[0].length;
+                    var store = _arr[i].toString(2).slice(7 - bytesLength);
+                    for (var st = 1; st < bytesLength; st++) {
+                        store += _arr[st + i].toString(2).slice(2);
+                    }
+                    str += String.fromCharCode(parseInt(store, 2));
+                    i += bytesLength - 1;
+                } else {
+                    str += String.fromCharCode(_arr[i]);
+                }
+            }
+            return str;
+        }
+
+
+        const keyi = CryptoJS.enc.Utf8.parse("DkOliWvFNR7C4WvR"); //十六位十六进制数作为密钥
+        const ivi = CryptoJS.enc.Utf8.parse(''); //十六位十六进制数作为密钥偏移量
+
+
+        function getAesString(data, key, iv) { //加密
+
+            // var key = Crypto.enc.Utf8.parse(key);
+            // var iv = CryptoJS.enc.Utf8.parse(iv);
+            // var encrypted = CryptoJS.AES.encrypt(data, key, {
+            //     iv: iv,
+            //     mode: CryptoJS.mode.CBC,
+            //     padding: CryptoJS.pad.Pkcs7
+            // });
+
+            // return encrypted.toString(); //返回的是base64格式的密文
+            var t = CryptoJS.AES.encrypt(data, key, iv);
+            return t;
+        }
+
+        function getAES(data, key, iv) { //加密
+            var encrypted = getAesString(data, key, iv); //密文
+            var encrypted1 = CryptoJS.enc.Utf8.parse(encrypted);
+            return encrypted;
+        }
+
+        //encrypt
+        function Encrypt2(word) {
+            let srcs = CryptoJS.enc.Utf8.parse(word);
+            let encrypted = CryptoJS.AES.encrypt(srcs, keyi, {
+                iv: ivi,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+            return encrypted.ciphertext.toString().toUpperCase();
+        }
+
+         //decrypt
+         function Decrypt2(word,key) {
+            let encrypted = CryptoJS.AES.decrypt(word,key);
+            return encrypted.toString();
+        }
+
+        function fnC() {
+            //DkOliWvFNR7C4WvR
+            var b = [68, 107, 79, 108, 105, 87, 118, 70, 78, 82, 55, 67, 52, 87, 118, 82];
+            //GQWKUE2CVGOOBKXU
+            var b2 = [71, 81, 87, 75, 85, 69, 50, 67, 86, 71, 79, 79, 66, 75, 88, 85];
+            var str = "1610507756652:0:46893840"; //646286b8d0748c7b2288e39c35a1566d76621600c2a0fcb1
+            var key = "DkOliWvFNR7C4WvR";
+            var iv = "";
+            var v1 = stringToByte(str);
+            var v0 = getAES(str, key, iv);
+            var v2 = byteToString(v1);
+
+            var ss = "";
+        }
+    </script>
+</head>
+
+<body>
+
+    <button onclick="fnC()">点我
+
+</body>
+
+</html>
